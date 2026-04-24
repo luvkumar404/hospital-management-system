@@ -3,8 +3,6 @@ package com.example.hms.entity;
 import jakarta.persistence.*;
 import lombok.*;
 
-import javax.print.Doc;
-import java.time.LocalDate;
 import java.time.LocalDateTime;
 
 @Entity
@@ -20,16 +18,18 @@ public class Appointment {
     private Long id;
 
     @Column(nullable = false)
-    private LocalDateTime apppointmentTime;
+    private LocalDateTime appointmentTime;
 
     @Column(length = 100)
     private String reason;
 
     @ManyToOne
-    @JoinColumn(name = "paitent_id", nullable = false) //Paitent is required and not nullable
-    private Paitent paitent;
+    @ToString.Exclude
+    @JoinColumn(name = "patient_id", nullable = false) //Patient is required and not nullable
+    private Patient patient;
 
     @ManyToOne
+    @ToString.Exclude
     @JoinColumn(nullable = false)
     private Doctor doctor;
 

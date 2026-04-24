@@ -1,31 +1,28 @@
 package com.example.hms;
 
-import com.example.hms.dto.BloodGroupCountResponseEntity;
-import com.example.hms.entity.Paitent;
-import com.example.hms.entity.type.BloodGroup;
-import com.example.hms.repository.PaitentRepository;
-import com.example.hms.service.PaitentService;
+import com.example.hms.entity.Patient;
+import com.example.hms.repository.PatientRepository;
+import com.example.hms.service.PatientService;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 
-import java.time.LocalDate;
 import java.util.List;
 
 @SpringBootTest
-public class PaitentTests {
+public class PatientTests {
 
     @Autowired
-    private PaitentRepository paitentRepository;
+    private PatientRepository patientRepository;
 
     @Autowired
-    private PaitentService paitentService;
+    private PatientService patientService;
 
     @Test
-    public void testPaitentRepository(){
-        List<Paitent> paitentList = paitentRepository.findAll();
+    public void testPatientRepository(){
+        List<Patient> paitentList = patientRepository.findAll();
         System.out.println(paitentList);
     }
 
@@ -39,9 +36,9 @@ public class PaitentTests {
 
 
 
-          Page<Paitent> paitentList = paitentRepository.findAllPaitent(PageRequest.of(0,1));
+          Page<Patient> paitentList = patientRepository.findAllPatient(PageRequest.of(0,1));
 
-        for(Paitent paitent : paitentList){
+        for(Patient paitent : paitentList){
             System.out.println(paitent);
         }
 //

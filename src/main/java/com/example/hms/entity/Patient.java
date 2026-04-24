@@ -2,7 +2,6 @@ package com.example.hms.entity;
 
 import com.example.hms.entity.type.BloodGroup;
 import jakarta.persistence.*;
-import jdk.jfr.Timestamp;
 import lombok.Getter;
 import lombok.Setter;
 import lombok.ToString;
@@ -18,18 +17,18 @@ import java.util.List;
 @Getter
 @Setter
 @Table (
-        name = "paitent",
+        name = "patient",
         uniqueConstraints = {
-//                @UniqueConstraint(name = "unique_paitent_email", columnNames =  {"email"}),
-                @UniqueConstraint(name = "unique_paitent_name_birthDate", columnNames = {"name"})
+//                @UniqueConstraint(name = "unique_patient_email", columnNames =  {"email"}),
+                @UniqueConstraint(name = "unique_patient_name_birthDate", columnNames = {"name"})
         },
         indexes = {
-                @Index(name = "idx_paitent_bithDate", columnList = "birthDate")
+                @Index(name = "idx_patient_bithDate", columnList = "birthDate")
         }
 )
 
 
-public class Paitent {
+public class Patient {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
@@ -53,10 +52,10 @@ public class Paitent {
     private BloodGroup bloodGroup;
 
     @OneToOne(cascade = {CascadeType.ALL}, orphanRemoval = true)
-    @JoinColumn(name = "paitent_insurance_id") //owning side
+    @JoinColumn(name = "patient_insurance_id") //owning side
     private Insurance insurance;
 
-    @OneToMany(mappedBy = "paitent", cascade = {CascadeType.REMOVE}, orphanRemoval = true)
+    @OneToMany(mappedBy = "patient", cascade = {CascadeType.REMOVE}, orphanRemoval = true, fetch = FetchType.EAGER)
     @ToString.Exclude
     private List<Appointment> appointments = new ArrayList<>();
 }

@@ -1,9 +1,9 @@
 package com.example.hms.service;
 
 import com.example.hms.entity.Insurance;
-import com.example.hms.entity.Paitent;
+import com.example.hms.entity.Patient;
 import com.example.hms.repository.InsuranceRepository;
-import com.example.hms.repository.PaitentRepository;
+import com.example.hms.repository.PatientRepository;
 import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
@@ -12,24 +12,24 @@ import org.springframework.stereotype.Service;
 @RequiredArgsConstructor
 public class InsuranceService {
     private final InsuranceRepository  insuranceRepository;
-    private final PaitentRepository paitentRepository;
+    private final PatientRepository patientRepository;
 
     @Transactional
-    public Paitent assignInsurancetoPaitent(Insurance insurance, Long paitentId){
-         Paitent paitent = paitentRepository.findById(paitentId).orElse(null);
+    public Patient assignInsurancetopatient(Insurance insurance, Long patientId){
+         Patient patient = patientRepository.findById(patientId).orElse(null);
 
-         paitent.setInsurance(insurance);
-         insurance.setPaitent(paitent); //Bidirectional consistency maintain rahe
+         patient.setInsurance(insurance);
+         insurance.setPatient(patient); //Bidirectional consistency maintain rahe
 
 
-        return paitent;
+        return patient;
     }
 
     @Transactional
-    public Paitent disaccociatePaitent(Long paitentId){
-        Paitent paitent = paitentRepository.findById(paitentId).orElse(null);
+    public Patient disaccociatepatient(Long patientId){
+        Patient patient = patientRepository.findById(patientId).orElse(null);
 
-        paitent.setInsurance(null);
-        return paitent;
+        patient.setInsurance(null);
+        return patient;
     }
 }
